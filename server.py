@@ -6,10 +6,10 @@ app = Flask("Emotion Detector")
 
 @app.route("/emotionDetector")
 def sent_emotion_detector():
-    """This code receives the text from the HTML interface and
+    '''This code receives the text from the HTML interface and
     runs emotion detection over it using emotion_detector()
     function. The output returned shows the emotions anger, disgust, fear, joy, sadness and dominant emotion.
-    """
+    '''
     text_to_analyze = request.args.get("textToAnalyze")
     response = emotion_detector(text_to_analyze)
     formatted_response = "For the given statement, the system response is "
