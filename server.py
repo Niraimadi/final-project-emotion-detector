@@ -12,16 +12,18 @@ def sent_emotion_detector():
     '''
     text_to_analyze = request.args.get("textToAnalyze")
     response = emotion_detector(text_to_analyze)
-    formatted_response = "For the given statement, the system response is "
-    for index, (key, value) in enumerate(response.items()):
-        if index == len(response.items()) - 2:
-            formatted_response += f"'{key}': {value}. "
-        elif index == len(response.items()) - 1:
-            formatted_response += f"The dominant emotion is <b>{value}.</b>"
-        else:
-            formatted_response += f"'{key}': {value}, "
+    if response["dominant_emotion"]:
+        formatted_response = "For the given statement, the system response is "
+        for index, (key, value) in enumerate(response.items()):
+            if index == len(response.items()) - 2:
+                formatted_response += f"'{key}': {value}. "
+            elif index == len(response.items()) - 1:
+                formatted_response += f"The dominant emotion is <b>{value}.</b>"
+            else:
+                formatted_response += f"'{key}': {value}, "
 
-    return formatted_response
+        return formatted_response
+    return "Invalid text! Please try again!."
 
 @app.route("/")
 def render_index_page():
